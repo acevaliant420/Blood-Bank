@@ -23,3 +23,21 @@ try:
     cursor.execute("CREATE TABLE BloodInfo(ProductId INT PRIMARY KEY, BloodGroup VARCHAR(5), NetAmount INT)")
 except:
     print("Tables Already Created")
+
+# Inserting pre recorded information
+try:
+    db = mysql.connector.connect(host="localhost", user="root", passwd=passd, database="blood_bank")
+    cursor = db.cursor()
+
+    cursor.execute("INSERT INTO BloodInfo VALUES(1, 'A+', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(2, 'A-', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(3, 'B+', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(4, 'B-', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(5, 'AB+', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(6, 'AB-', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(7, 'O+', 0)")
+    cursor.execute("INSERT INTO BloodInfo VALUES(8, 'O-', 0)")
+    db.commit()
+except:
+    print("Values Already Present")
+
