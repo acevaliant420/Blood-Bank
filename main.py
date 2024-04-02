@@ -49,6 +49,6 @@ bg = PhotoImage(file="background.png")
 
 app.iconphoto(False, icon)
 app.title("Blood Bank")
-app.geometry("450x330")
+app.geometry("1280x800")
 
 app.mainloop()
