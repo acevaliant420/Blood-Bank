@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from pathlib import Path
 
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
 
 
 import mysql.connector
@@ -114,7 +114,7 @@ def donorinfo():
         l.append(rec[1])
         l[1] += amount
         print(prod)
-        cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}'".format(l[1], prod))
+        cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = {1}".format(l[1], prod))
         cursor.execute("INSERT INTO DonorInfo VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
         print("doing")
         db.commit()
@@ -285,6 +285,269 @@ def donorinfo():
     newwindow.resizable(False, False)
     newwindow.mainloop()
 
+
+def check_availability():
+
+    OUTPUT_PATH = Path(__file__).parent
+    ASSETS_PATH = OUTPUT_PATH / Path(r"E:\College\2. Second Year\SEM 4\2. Labs\CS262 (DBMS Lab)\Project\Blood-Bank\assets\frame2")
+
+    def relative_to_assets(path: str) -> Path:
+        return ASSETS_PATH / Path(path)
+
+    newwindow = Toplevel(window)
+    newwindow.title("Blood Availability")
+
+
+    newwindow.geometry("1000x500")
+    newwindow.configure(bg="#FFFFFF")
+
+    canvas = Canvas(
+        newwindow,
+        bg="#FFFFFF",
+        height=500,
+        width=1000,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
+
+    canvas.place(x=0, y=0)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        500.0,
+        250.0,
+        image=image_image_1
+    )
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = 1")
+    rec = cursor.fetchone()
+    l1 = []
+    l1.append(rec[0])
+    l1.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  2")
+    rec = cursor.fetchone()
+    l2 = []
+    l2.append(rec[0])
+    l2.append(rec[1])
+    print(l2[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  3")
+    rec = cursor.fetchone()
+    l3 = []
+    l3.append(rec[0])
+    l3.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  4")
+    rec = cursor.fetchone()
+    l4 = []
+    l4.append(rec[0])
+    l4.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  5")
+    rec = cursor.fetchone()
+    l5 = []
+    l5.append(rec[0])
+    l5.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  6")
+    rec = cursor.fetchone()
+    l6 = []
+    l6.append(rec[0])
+    l6.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  7")
+    rec = cursor.fetchone()
+    l7 = []
+    l7.append(rec[0])
+    l7.append(rec[1])
+
+    cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  8")
+    rec = cursor.fetchone()
+    l8 = []
+    l8.append(rec[0])
+    l8.append(rec[1])
+    db.commit()
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        195.5,
+        190.0,
+        image=entry_image_1
+    )
+    entry_1 = Label(
+        newwindow,
+        text=l1[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_1.place(
+        x=163.0,
+        y=165.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        195.5,
+        380.0,
+        image=entry_image_2
+    )
+    entry_2 = Label(
+        newwindow,
+        text=l5[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_2.place(
+        x=163.0,
+        y=355.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        421.5,
+        380.0,
+        image=entry_image_3
+    )
+    entry_3 = Label(
+        newwindow,
+        text=l6[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_3.place(
+        x=389.0,
+        y=355.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        647.5,
+        380.0,
+        image=entry_image_4
+    )
+    entry_4 = Label(
+        newwindow,
+        text=l7[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_4.place(
+        x=615.0,
+        y=355.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_5 = PhotoImage(
+        file=relative_to_assets("entry_5.png"))
+    entry_bg_5 = canvas.create_image(
+        873.5,
+        380.0,
+        image=entry_image_5
+    )
+    entry_5 = Label(
+        newwindow,
+        text=l8[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_5.place(
+        x=841.0,
+        y=355.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_6 = PhotoImage(
+        file=relative_to_assets("entry_6.png"))
+    entry_bg_6 = canvas.create_image(
+        421.5,
+        190.0,
+        image=entry_image_6
+    )
+    entry_6 = Label(
+        newwindow,
+        text=l2[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_6.place(
+        x=389.0,
+        y=165.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_7 = PhotoImage(
+        file=relative_to_assets("entry_7.png"))
+    entry_bg_7 = canvas.create_image(
+        647.5,
+        190.0,
+        image=entry_image_7
+    )
+    entry_7 = Label(
+        newwindow,
+        text=l3[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_7.place(
+        x=615.0,
+        y=165.0,
+        width=65.0,
+        height=48.0
+    )
+
+    entry_image_8 = PhotoImage(
+        file=relative_to_assets("entry_8.png"))
+    entry_bg_8 = canvas.create_image(
+        873.5,
+        190.0,
+        image=entry_image_8
+    )
+    entry_8 = Label(
+        newwindow,
+        text=l4[1],
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_8.place(
+        x=841.0,
+        y=165.0,
+        width=65.0,
+        height=48.0
+    )
+    newwindow.resizable(False, False)
+    newwindow.mainloop()
+
+
 def main_window():
 
     icon = PhotoImage(file="icon.png")
@@ -339,7 +602,7 @@ def main_window():
         image=button_image_2,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_2 clicked"),
+        command=check_availability,
         relief="flat"
     )
     button_2.place(
