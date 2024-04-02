@@ -114,8 +114,10 @@ def donorinfo():
         l.append(rec[1])
         l[1] += amount
         print(prod)
-        cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = {1}".format(l[1], prod))
-        cursor.execute("INSERT INTO DonorInfo VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
+        cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}'".format(l[1], prod))
+        db.commit()
+        cursor.execute("INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
+        db.commit()
         print("doing")
         db.commit()
         print("done")
