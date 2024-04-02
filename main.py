@@ -41,3 +41,14 @@ try:
 except:
     print("Values Already Present")
 
+app = Tk()
+
+
+icon = PhotoImage(file="icon.png")
+bg = PhotoImage(file="background.png")
+
+app.iconphoto(False, icon)
+app.title("Blood Bank")
+app.geometry("450x330")
+
+app.mainloop()
