@@ -4,7 +4,6 @@ from pathlib import Path
 
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Label
 
-
 import mysql.connector
 
 passd = "user123!"
@@ -72,6 +71,204 @@ ASSETS_PATH = OUTPUT_PATH / Path(r"E:\College\2. Second Year\SEM 4\2. Labs\CS262
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 window = Tk()
+
+def patientsinfo():
+    OUTPUT_PATH = Path(__file__).parent
+    ASSETS_PATH = OUTPUT_PATH / Path(r"E:\College\2. Second Year\SEM 4\2. Labs\CS262 (DBMS Lab)\Project\Blood-Bank\assets\frame3")
+
+    def relative_to_assets(path: str) -> Path:
+        return ASSETS_PATH / Path(path)
+
+    newwindow = Toplevel(window)
+    newwindow.title("Get Blood")
+    newwindow.geometry("917x622")
+    newwindow.configure(bg="#FFFFFF")
+
+    canvas = Canvas(
+        newwindow,
+        bg="#FFFFFF",
+        height=622,
+        width=917,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
+
+    canvas.place(x=0, y=0)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        458.0,
+        311.0,
+        image=image_image_1
+    )
+
+    button_image_1 = PhotoImage(
+        file=relative_to_assets("button_1.png"))
+    button_1 = Button(
+        newwindow,
+        image=button_image_1,
+        borderwidth=0,
+        highlightthickness=0,
+        command=lambda: print("button_1 clicked"),
+        relief="flat"
+    )
+    button_1.place(
+        x=349.0,
+        y=548.0,
+        width=217.0,
+        height=54.0
+    )
+
+    entry_image_1 = PhotoImage(
+        file=relative_to_assets("entry_1.png"))
+    entry_bg_1 = canvas.create_image(
+        630.0,
+        139.5,
+        image=entry_image_1
+    )
+    entry_1 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_1.place(
+        x=459.0,
+        y=123.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_2 = PhotoImage(
+        file=relative_to_assets("entry_2.png"))
+    entry_bg_2 = canvas.create_image(
+        630.0,
+        192.5,
+        image=entry_image_2
+    )
+    entry_2 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_2.place(
+        x=459.0,
+        y=176.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_3 = PhotoImage(
+        file=relative_to_assets("entry_3.png"))
+    entry_bg_3 = canvas.create_image(
+        630.0,
+        244.5,
+        image=entry_image_3
+    )
+    entry_3 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_3.place(
+        x=459.0,
+        y=228.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_4 = PhotoImage(
+        file=relative_to_assets("entry_4.png"))
+    entry_bg_4 = canvas.create_image(
+        630.0,
+        296.5,
+        image=entry_image_4
+    )
+    entry_4 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_4.place(
+        x=459.0,
+        y=280.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_5 = PhotoImage(
+        file=relative_to_assets("entry_5.png"))
+    entry_bg_5 = canvas.create_image(
+        630.0,
+        352.5,
+        image=entry_image_5
+    )
+    entry_5 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_5.place(
+        x=459.0,
+        y=336.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_6 = PhotoImage(
+        file=relative_to_assets("entry_6.png"))
+    entry_bg_6 = canvas.create_image(
+        630.0,
+        409.5,
+        image=entry_image_6
+    )
+    entry_6 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_6.place(
+        x=459.0,
+        y=393.0,
+        width=342.0,
+        height=31.0
+    )
+
+    entry_image_7 = PhotoImage(
+        file=relative_to_assets("entry_7.png"))
+    entry_bg_7 = canvas.create_image(
+        630.0,
+        480.5,
+        image=entry_image_7
+    )
+    entry_7 = Entry(
+        newwindow,
+        bd=0,
+        bg="#D9D9D9",
+        fg="#000716",
+        highlightthickness=0
+    )
+    entry_7.place(
+        x=459.0,
+        y=444.0,
+        width=342.0,
+        height=71.0
+    )
+    newwindow.resizable(False, False)
+    newwindow.mainloop()
+
 
 def donorinfo():
     OUTPUT_PATH = Path(__file__).parent
@@ -652,7 +849,7 @@ def main_window():
         image=button_image_5,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_5 clicked"),
+        command=patientsinfo,
         relief="flat"
     )
     button_5.place(
