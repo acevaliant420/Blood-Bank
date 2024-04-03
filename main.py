@@ -300,33 +300,42 @@ def donorinfo():
         aadhar = e_aadhar.get()
         name = e_name.get()
         blood = e_blood.get()
-        amount = int(e_amount.get())
-        mobile = int(e_mobile.get())
+        try:
+            amount = int(e_amount.get())
+            mobile = int(e_mobile.get())
+        except:
+            messagebox.showerror(title='Blood Donation', message='Empty Form')
+            newwindow.destroy()
+            return
         city = e_city.get()
         prod = productID(blood)
-        cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = '{0}'".format(prod))
-        rec = cursor.fetchone()
-        l = []
-        l.append(rec[0])
-        l.append(rec[1])
-        l[1] += amount
-        print(prod)
-        cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}'".format(l[1], prod))
-        db.commit()
-        cursor.execute("INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
-        db.commit()
-        print("doing")
-        db.commit()
-        print("done")
-        e_aadhar.delete(0, END)
-        e_name.delete(0, END)
-        e_blood.delete(0, END)
-        e_amount.delete(0, END)
-        e_mobile.delete(0, END)
-        e_city.delete(0, END)
+        try:
+            cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = '{0}'".format(prod))
+            rec = cursor.fetchone()
+            l = []
+            l.append(rec[0])
+            l.append(rec[1])
+            l[1] += amount
+            print(prod)
+            cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}'".format(l[1], prod))
+            db.commit()
+            cursor.execute("INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
+            db.commit()
+            print("doing")
+            db.commit()
+            print("done")
+            e_aadhar.delete(0, END)
+            e_name.delete(0, END)
+            e_blood.delete(0, END)
+            e_amount.delete(0, END)
+            e_mobile.delete(0, END)
+            e_city.delete(0, END)
 
-        messagebox.showinfo(title='Blood Donation', message='Blood Donated Successfully')
-        newwindow.destroy()
+            messagebox.showinfo(title='Blood Donation', message='Blood Donated Successfully')
+            newwindow.destroy()
+        except:
+            messagebox.showerror(title='Blood Donation', message='Blood could not be donated')
+            newwindow.destroy()
 
 
     new_canva.place(x=0, y=0)
