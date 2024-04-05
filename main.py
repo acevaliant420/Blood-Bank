@@ -94,6 +94,35 @@ def patientsinfo():
         relief="ridge"
     )
 
+    def submit():
+        db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
+        cursor = db.cursor()
+
+        name = e_name.get()
+        blood = e_blood.get()
+        try:
+            aadhar = int(e_aadhar.get())
+            amount = int(e_amount.get())
+            mobile = int(e_mobile.get())
+        except:
+            messagebox.showerror(title='Blood Donation', message='Empty Form/wrong Entry')
+            newwindow.destroy()
+            return
+        city = e_city.get()
+        prod = productID(blood)
+
+        d_aa = len(str(aadhar))
+        d_mob = len(str(mobile))
+
+        if (d_aa != 12):
+            messagebox.showerror(title='Aadhar Error', message='Aadhar No. should be of 12 digits')
+            newwindow.destroy()
+            return
+        if (d_mob != 10):
+            messagebox.showerror(title='Aadhar Error', message='Mobile No. should be of 10 digits')
+            newwindow.destroy()
+            return
+
     canvas.place(x=0, y=0)
     image_image_1 = PhotoImage(
         file=relative_to_assets("image_1.png"))
@@ -270,6 +299,7 @@ def patientsinfo():
     newwindow.mainloop()
 
 
+
 def donorinfo():
     OUTPUT_PATH = Path(__file__).parent
     ASSETS_PATH = OUTPUT_PATH / Path(r"E:\College\2. Second Year\SEM 4\2. Labs\CS262 (DBMS Lab)\Project\Blood-Bank\assets\frame1")
@@ -297,33 +327,74 @@ def donorinfo():
         db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
         cursor = db.cursor()
 
-        aadhar = e_aadhar.get()
+
         name = e_name.get()
         blood = e_blood.get()
         try:
+            aadhar = int(e_aadhar.get())
             amount = int(e_amount.get())
             mobile = int(e_mobile.get())
         except:
-            messagebox.showerror(title='Blood Donation', message='Empty Form')
+            messagebox.showerror(title='Blood Donation', message='Empty Form/wrong Entry')
             newwindow.destroy()
             return
         city = e_city.get()
         prod = productID(blood)
+
+        d_aa = len(str(aadhar))
+        d_mob = len(str(mobile))
+
+        if(d_aa!=12):
+            messagebox.showerror(title='Aadhar Error', message='Aadhar No. should be of 12 digits')
+            newwindow.destroy()
+            return
+        if (d_mob!=10):
+            messagebox.showerror(title='Aadhar Error', message='Mobile No. should be of 10 digits')
+            newwindow.destroy()
+            return
+
+
+        if(prod >=1 and prod<=8):
+            print("good")
+        else:
+            messagebox.showerror(title='Wrong Blood Group', message='Wrong Blood Group Entered')
+            newwindow.destroy()
+            return
+
+
+
         try:
-            cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = '{0}'".format(prod))
+            cursor.execute("INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
+            db.commit()
+        except:
+            print("Checking if user is already entered")
+            try:
+                cursor.execute("SELECT Amount from DonorInfo where AadharNo = '{0}';".format(aadhar))
+                rec = cursor.fetchone()
+                l = []
+                l.append(rec[0])
+                cursor.execute("UPDATE DonorInfo SET Amount = Amount + {0} WHERE AadharNo = {1};".format(l[0], aadhar))
+                db.commit()
+
+            except:
+                messagebox.showerror(title='Blood Donation', message='Blood could not be donated')
+                newwindow.destroy()
+                return
+
+
+
+        try:
+            cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = '{0}';".format(prod))
             rec = cursor.fetchone()
             l = []
             l.append(rec[0])
             l.append(rec[1])
-            l[1] += amount
-            print(prod)
-            cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}'".format(l[1], prod))
+            amount += l[1]
+            print(amount)
+            cursor.execute("UPDATE BloodInfo set NetAmount = {0} WHERE productid = '{1}';".format(amount, prod))
             db.commit()
-            cursor.execute("INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}')".format(aadhar, name, blood, amount, mobile, city))
-            db.commit()
-            print("doing")
-            db.commit()
-            print("done")
+
+
             e_aadhar.delete(0, END)
             e_name.delete(0, END)
             e_blood.delete(0, END)
@@ -334,9 +405,10 @@ def donorinfo():
             messagebox.showinfo(title='Blood Donation', message='Blood Donated Successfully')
             newwindow.destroy()
         except:
-            messagebox.showerror(title='Blood Donation', message='Blood could not be donated')
+            messagebox.showerror(title='Blood Donation', message='Could Not Update Blood Group Amount')
+            db.rollback()
             newwindow.destroy()
-
+            return
 
     new_canva.place(x=0, y=0)
     image_image_1 = PhotoImage(
@@ -539,7 +611,6 @@ def check_availability():
     l2 = []
     l2.append(rec[0])
     l2.append(rec[1])
-    print(l2[1])
 
     cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid =  3")
     rec = cursor.fetchone()
@@ -820,7 +891,7 @@ def main_window():
         height=44.0
     )
 
-    button_image_3 = PhotoImage(
+    """    button_image_3 = PhotoImage(
         file=relative_to_assets("button_3.png"))
     button_3 = Button(
         image=button_image_3,
@@ -834,7 +905,7 @@ def main_window():
         y=84.0,
         width=91.0,
         height=37.0
-    )
+    )"""
 
     button_image_4 = PhotoImage(
         file=relative_to_assets("button_4.png"))
