@@ -298,7 +298,39 @@ def patientsinfo():
     newwindow.resizable(False, False)
     newwindow.mainloop()
 
+def about_us():
+    OUTPUT_PATH = Path(__file__).parent
+    ASSETS_PATH = OUTPUT_PATH / Path(
+        r"E:\College\2. Second Year\SEM 4\2. Labs\CS262 (DBMS Lab)\Project\Blood-Bank\assets\frame5")
 
+    def relative_to_assets(path: str) -> Path:
+        return ASSETS_PATH / Path(path)
+
+    newwindow = Toplevel(window)
+    newwindow.title("About Us")
+    newwindow.geometry("800x800")
+    newwindow.configure(bg="#FFFFFF")
+
+    canvas = Canvas(
+        newwindow,
+        bg="#FFFFFF",
+        height=800,
+        width=800,
+        bd=0,
+        highlightthickness=0,
+        relief="ridge"
+    )
+
+    canvas.place(x=0, y=0)
+    image_image_1 = PhotoImage(
+        file=relative_to_assets("image_1.png"))
+    image_1 = canvas.create_image(
+        400.0,
+        400.0,
+        image=image_image_1
+    )
+    newwindow.resizable(False, False)
+    newwindow.mainloop()
 
 def donorinfo():
     OUTPUT_PATH = Path(__file__).parent
@@ -1520,7 +1552,7 @@ def main_window():
         image=button_image_4,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_4 clicked"),
+        command=about_us,
         relief="flat"
     )
     button_4.place(
