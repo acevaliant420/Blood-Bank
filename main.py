@@ -600,6 +600,9 @@ def check_availability():
         image=image_image_1
     )
 
+    db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
+    cursor = db.cursor()
+
     cursor.execute("SELECT BloodGroup, NetAmount from BloodInfo where productid = 1")
     rec = cursor.fetchone()
     l1 = []
