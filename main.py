@@ -22,7 +22,6 @@ try:
     cursor = db.cursor()
     cursor.execute("CREATE TABLE DonorInfo(AadharNo VARCHAR(12) PRIMARY KEY, Name VARCHAR(40), BloodGroup VARCHAR(5), Amount INT, MobileNo VARCHAR(10), City VARCHAR(20))")
     cursor.execute("CREATE TABLE PatientsInfo(AadharNo VARCHAR(12) PRIMARY KEY, Name VARCHAR(40), BloodGroup VARCHAR(5), Amount INT, Disease VARCHAR(20))")
-    cursor.execute("CREATE TABLE OrderInfo(OrderId INT PRIMARY KEY, AadharNo CHAR(12), Status CHAR(1), ProductId INT)")
     cursor.execute("CREATE TABLE BloodInfo(ProductId INT PRIMARY KEY, BloodGroup VARCHAR(5), NetAmount INT)")
     db.commit()
 except:
@@ -109,6 +108,7 @@ def patientsinfo():
             newwindow.destroy()
             return
         city = e_city.get()
+        reason = e_reason.get()
         prod = productID(blood)
 
         d_aa = len(str(aadhar))
@@ -122,6 +122,45 @@ def patientsinfo():
             messagebox.showerror(title='Aadhar Error', message='Mobile No. should be of 10 digits')
             newwindow.destroy()
             return
+
+        if (prod >= 1 and prod <= 8):
+            print("good")
+        else:
+            messagebox.showerror(title='Wrong Blood Group', message='Wrong Blood Group Entered')
+            newwindow.destroy()
+            return
+
+        cursor.execute("SELECT NetAmount from BloodInfo where productid = '{0}';".format(prod))
+        rec = cursor.fetchone()
+        l = []
+        l.append(rec[0])
+        if(l[0]>=amount):
+
+            messagebox.showinfo(title='Get Blood Donation', message='Sufficient Blood Available, Donating the Blood')
+            try:
+                new_amount = l[0] - amount;
+                print(new_amount)
+                cursor.execute("UPDATE BloodInfo set NetAmount = '{0}' WHERE productid = '{1}';".format(new_amount, prod))
+                cursor.execute(
+                    "INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City, Disease) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}', '{6}')".format(
+                        aadhar, name, blood, amount, mobile, city, reason))
+                db.commit()
+
+                messagebox.showinfo(title='Blood Donation', message='Blood Retreived Successfully')
+                newwindow.destroy()
+            except:
+                messagebox.showerror(title='Blood Donation', message='Could Not Donate Blood')
+                newwindow.destroy()
+                return
+
+        else:
+            messagebox.showerror(title='Get Blood Donation', message='Sufficient Blood Not available to Donate, Please try from different blood bank')
+            newwindow.destroy()
+            return
+
+
+
+
 
     canvas.place(x=0, y=0)
     image_image_1 = PhotoImage(
@@ -139,7 +178,7 @@ def patientsinfo():
         image=button_image_1,
         borderwidth=0,
         highlightthickness=0,
-        command=lambda: print("button_1 clicked"),
+        command=submit,
         relief="flat"
     )
     button_1.place(
@@ -156,19 +195,21 @@ def patientsinfo():
         139.5,
         image=entry_image_1
     )
-    entry_1 = Entry(
+    e_aadhar = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_1.place(
+    e_aadhar.place(
         x=459.0,
         y=123.0,
         width=342.0,
         height=31.0
     )
+
+
 
     entry_image_2 = PhotoImage(
         file=relative_to_assets("entry_2.png"))
@@ -177,14 +218,14 @@ def patientsinfo():
         192.5,
         image=entry_image_2
     )
-    entry_2 = Entry(
+    e_name = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_2.place(
+    e_name.place(
         x=459.0,
         y=176.0,
         width=342.0,
@@ -198,14 +239,14 @@ def patientsinfo():
         244.5,
         image=entry_image_3
     )
-    entry_3 = Entry(
+    e_blood = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_3.place(
+    e_blood.place(
         x=459.0,
         y=228.0,
         width=342.0,
@@ -219,14 +260,14 @@ def patientsinfo():
         296.5,
         image=entry_image_4
     )
-    entry_4 = Entry(
+    e_amount = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_4.place(
+    e_amount.place(
         x=459.0,
         y=280.0,
         width=342.0,
@@ -240,14 +281,14 @@ def patientsinfo():
         352.5,
         image=entry_image_5
     )
-    entry_5 = Entry(
+    e_mobile = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_5.place(
+    e_mobile.place(
         x=459.0,
         y=336.0,
         width=342.0,
@@ -261,14 +302,14 @@ def patientsinfo():
         409.5,
         image=entry_image_6
     )
-    entry_6 = Entry(
+    e_city = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_6.place(
+    e_city.place(
         x=459.0,
         y=393.0,
         width=342.0,
@@ -282,14 +323,14 @@ def patientsinfo():
         480.5,
         image=entry_image_7
     )
-    entry_7 = Entry(
+    e_reason = Entry(
         newwindow,
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
         highlightthickness=0
     )
-    entry_7.place(
+    e_reason.place(
         x=459.0,
         y=444.0,
         width=342.0,
