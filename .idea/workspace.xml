@@ -5,8 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2edcd031-8162-4996-87b0-c728a845e5e6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Blood-Bank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Blood-Bank.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/button_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/entry_9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/frame4/image_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +50,22 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2es3bGm0JVCSJWcuJh2OKmotEWY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "Python.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/rajat/AppData/Local/Programs/Python/Python312/python.exe",
+    "last_opened_file_path": "E:/College/2. Second Year/SEM 4/2. Labs/CS262 (DBMS Lab)/Project/tkinter/Tkinter-Designer-master/Tkinter-Designer-master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -62,13 +92,29 @@
       <updated>1712679530137</updated>
       <workItem from="1712679532990" duration="300000" />
       <workItem from="1712679893829" duration="270000" />
+      <workItem from="1712680178005" duration="4935000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>568</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Blood_Bank$main.coverage" NAME="main Coverage Results" MODIFIED="1712679806159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1712685085417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
