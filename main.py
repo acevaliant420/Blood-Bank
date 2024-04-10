@@ -97,6 +97,13 @@ def patientsinfo():
         db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
         cursor = db.cursor()
 
+        try:
+            trig_2 = "DELIMITER ///  	Create Trigger newgative_amount BEFORE INSERT ON patientsinfo FOR EACH ROW  BEGIN  IF NEW.amount < 0 THEN SET NEW.amount = 0;  END IF;  END ///  DELIMITER ;"
+            cursor.execute(trig_2)
+            db.commit()
+        except:
+            print("Trigger 2 Already Created")
+
         name = e_name.get()
         blood = e_blood.get()
         try:
@@ -138,19 +145,30 @@ def patientsinfo():
 
             messagebox.showinfo(title='Get Blood Donation', message='Sufficient Blood Available, Donating the Blood')
             try:
+                db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
+                cursor = db.cursor()
                 new_amount = l[0] - amount;
                 print(new_amount)
-                cursor.execute("UPDATE BloodInfo set NetAmount = '{0}' WHERE productid = '{1}';".format(new_amount, prod))
+                sql = "UPDATE BloodInfo set NetAmount = '{0}' WHERE productid = '{1}';".format(new_amount, prod)
+                cursor.execute(sql)
+                db.commit()
+            except:
+                messagebox.showerror(title='Blood Donation', message='Could Not Donate Blood')
+                newwindow.destroy()
+                return
+
+            try:
                 cursor.execute(
-                    "INSERT INTO DonorInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City, Disease) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}', '{6}')".format(
+                    "INSERT INTO PatientsInfo (AadharNo, Name, BloodGroup, Amount, MobileNo, City, Disease) VALUES('{0}','{1}', '{2}', {3}, {4}, '{5}', '{6}')".format(
                         aadhar, name, blood, amount, mobile, city, reason))
                 db.commit()
 
                 messagebox.showinfo(title='Blood Donation', message='Blood Retreived Successfully')
                 newwindow.destroy()
             except:
-                messagebox.showerror(title='Blood Donation', message='Could Not Donate Blood')
+                messagebox.showerror(title='Blood Donation', message='Cannot Donate Blood')
                 newwindow.destroy()
+                db.rollback()
                 return
 
         else:
@@ -328,7 +346,8 @@ def patientsinfo():
         bd=0,
         bg="#D9D9D9",
         fg="#000716",
-        highlightthickness=0
+        highlightthickness=0,
+        justify = LEFT
     )
     e_reason.place(
         x=459.0,
@@ -400,6 +419,12 @@ def donorinfo():
         db = mysql.connector.connect(host="localhost", user="root", passwd="user123!", database="blood_bank")
         cursor = db.cursor()
 
+        try:
+            trig_1 = "DELIMITER ///  	Create Trigger newgative_amount BEFORE INSERT ON donorinfo FOR EACH ROW  BEGIN  IF NEW.amount < 0 THEN SET NEW.amount = 0;  END IF;  END ///  DELIMITER ;"
+            cursor.execute(trig_1)
+            db.commit()
+        except:
+            print("Trigger Already Created")
 
         name = e_name.get()
         blood = e_blood.get()
